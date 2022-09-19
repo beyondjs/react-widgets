@@ -1,0 +1,30 @@
+{
+  "scope": "beyond-js",
+  "name": "react-widgets",
+  "version": "18.18.2",
+  "license": "MIT",
+  "modules": {
+    "path": "./"
+  },
+  "deployment": {
+    "distributions": [
+      {
+        "name": "npm",
+        "npm": {
+          "platforms": {
+            "web": "web",
+            "ssr": "ssr"
+          }
+        }
+      },
+      {
+        "name": "web-tsc",
+        "platform": "web",
+        "port": 9918,
+        "ts": {
+          "compiler": "tsc"
+        }
+      }
+    ]
+  }
+}

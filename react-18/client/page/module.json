@@ -1,0 +1,10 @@
+{
+  "name": "page",
+  "platforms": [
+    "web",
+    "android",
+    "ios"
+  ],
+  "bundle": "ts",
+  "files": "*"
+}
