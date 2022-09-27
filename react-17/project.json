@@ -6,10 +6,20 @@
   "modules": {
     "path": "./"
   },
+  "libraries": {
+    "imports": [
+      "@beyond-js/kernel",
+      "@beyond-js/widgets"
+    ]
+  },
   "deployment": {
     "distributions": [
       {
         "name": "npm",
+        "maps": "external",
+        "ports": {
+          "bundles": 9109
+        },
         "npm": {
           "platforms": {
             "web": "web",
@@ -20,7 +30,9 @@
       {
         "name": "web-tsc",
         "platform": "web",
-        "port": 9993,
+        "ports": {
+          "bundles": 9110
+        },
         "ts": {
           "compiler": "tsc"
         }
