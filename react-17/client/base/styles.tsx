@@ -17,7 +17,8 @@ export default function ({styles}: Props) {
     }, []);
 
     const head: React.ReactElement[] = [...styles.resources].map(url => {
-        return <link key={url} href={url} rel='stylesheet' onLoad={() => styles.onloaded(url)}/>;
+        const loaded = () => styles.onloaded(url);
+        return <link key={url} href={url} rel='stylesheet' onLoad={loaded} onError={loaded}/>;
     });
     return <>{head}</>;
 }

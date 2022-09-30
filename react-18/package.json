@@ -1,9 +1,10 @@
 {
   "dependencies": {
-    "@beyond-js/widgets": "0.0.10",
-    "@types/react": "^18.0.12",
-    "@types/react-dom": "^18.0.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5"
   }
 }
