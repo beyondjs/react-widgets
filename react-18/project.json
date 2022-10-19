@@ -6,6 +6,12 @@
   "modules": {
     "path": "./"
   },
+  "libraries": {
+    "imports": [
+      "@beyond-js/kernel",
+      "@beyond-js/widgets"
+    ]
+  },
   "deployment": {
     "distributions": [
       {
