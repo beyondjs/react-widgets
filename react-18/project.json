@@ -1,7 +1,7 @@
 {
   "scope": "beyond-js",
   "name": "react-widgets",
-  "version": "18.18.2",
+  "version": "18.20.1",
   "license": "MIT",
   "modules": {
     "path": "./"
@@ -17,9 +17,6 @@
       {
         "name": "npm",
         "maps": "external",
-        "ports": {
-          "bundles": 9111
-        },
         "npm": {
           "platforms": {
             "web": "web",
@@ -28,8 +25,18 @@
         }
       },
       {
-        "name": "web-tsc",
+        "name": "web",
         "platform": "web",
+        "ports": {
+          "bundles": 9111
+        },
+        "ts": {
+          "compiler": "tsc"
+        }
+      },
+      {
+        "name": "ssr",
+        "platform": "ssr",
         "ports": {
           "bundles": 9112
         },
