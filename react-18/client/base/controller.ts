@@ -32,7 +32,9 @@ abstract class ReactWidgetController extends WidgetClientController {
         // Render the widget
         try {
             const wrapper = this.#wrapper = new Wrapper(this);
-            const p = {wrapper, props, styles: this.styles, holder: (<any>this.widget).holder};
+            const {styles, widget} = this;
+            const {holder} = (<any>widget);
+            const p = {wrapper, props, styles, holder, hydrate};
             const element = React.createElement(Widget, p);
 
             if (hydrate) {

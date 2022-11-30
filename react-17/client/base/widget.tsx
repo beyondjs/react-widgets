@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Styles from './styles';
 
-export default function ({wrapper, props, styles, holder}: any) {
+export default function ({wrapper, props, styles, holder, hydrate}: any) {
     const elements: React.ReactElement[] = [];
     elements.push(<Styles key="styles" styles={styles} widget={props.widget}/>);
 
@@ -19,8 +19,8 @@ export default function ({wrapper, props, styles, holder}: any) {
     })();
 
     const {Widget} = wrapper;
-    const widget = <Widget key="widgets" {...props}/>;
-    loaded && elements.push(widget);
+    const widget = <Widget key="widget" {...props}/>;
+    (hydrate || loaded) && elements.push(widget);
 
     return (<>{elements}</>);
 }
