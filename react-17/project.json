@@ -6,11 +6,15 @@
   "modules": {
     "path": "./"
   },
-  "libraries": {
-    "imports": [
-      "@beyond-js/kernel",
-      "@beyond-js/widgets"
-    ]
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "@beyond-js/kernel": "^0.1.5",
+    "@beyond-js/widgets": "^0.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.52",
+    "@types/react-dom": "^17.0.18"
   },
   "deployment": {
     "distributions": [

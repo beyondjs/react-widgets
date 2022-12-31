@@ -5,6 +5,7 @@
     "module": "es2020",
     "jsx": "react-jsx",
     "noImplicitAny": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true
   }
 }

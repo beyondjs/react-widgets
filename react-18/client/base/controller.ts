@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from 'react';
 import {createRoot, Root, hydrateRoot} from 'react-dom/client';
 import {WidgetClientController} from '@beyond-js/widgets/controller';
 import Widget from './widget';
