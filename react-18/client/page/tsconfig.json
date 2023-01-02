@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "experimentalDecorators": true,
     "module": "es2020",
+    "experimentalDecorators": true,
     "jsx": "react-jsx",
     "noImplicitAny": true,
     "moduleResolution": "Node"

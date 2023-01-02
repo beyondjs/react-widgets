@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 export default function ({styles}: { styles: string[] }) {
     const head: React.ReactElement[] = [];

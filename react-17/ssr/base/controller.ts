@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {WidgetServerController, IWidgetRendered} from '@beyond-js/widgets/controller';
 import Widget from './widget';

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from 'react';
 import * as ReactDOM from "react-dom";
 import {retargetEvents} from "./retarget-events";
 import {WidgetClientController} from '@beyond-js/widgets/controller';
