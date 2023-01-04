@@ -1,7 +1,7 @@
 {
   "scope": "beyond-js",
-  "name": "react-widgets",
-  "version": "18.20.3",
+  "name": "react-18-widgets",
+  "version": "0.0.1",
   "license": "MIT",
   "modules": {
     "path": "./"
