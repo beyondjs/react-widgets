@@ -1,1 +1,0 @@
-# Welcome to `@beyond-js/react-widgets` package

@@ -1,4 +1,4 @@
-import {ReactWidgetController} from '@beyond-js/react-widgets/base';
+import {ReactWidgetController} from '@beyond-js/react-17-widgets/base';
 import {PageURI} from '@beyond-js/widgets/routing';
 
 export /*bundle*/
