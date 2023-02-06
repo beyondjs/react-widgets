@@ -29,7 +29,7 @@
         "name": "web",
         "platform": "web",
         "ports": {
-          "bundles": 9109
+          "bundles": 9110
         },
         "ts": {
           "compiler": "tsc"
@@ -39,7 +39,7 @@
         "name": "ssr",
         "platform": "ssr",
         "ports": {
-          "bundles": 9110
+          "bundles": 9111
         },
         "ts": {
           "compiler": "tsc"

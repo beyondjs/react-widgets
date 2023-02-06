@@ -16,20 +16,10 @@
   "deployment": {
     "distributions": [
       {
-        "name": "npm",
-        "maps": "external",
-        "npm": {
-          "platforms": {
-            "web": "web",
-            "ssr": "ssr"
-          }
-        }
-      },
-      {
         "name": "web",
         "platform": "web",
         "ports": {
-          "bundles": 9111
+          "bundles": 9112
         },
         "ts": {
           "compiler": "tsc"
@@ -39,7 +29,7 @@
         "name": "ssr",
         "platform": "ssr",
         "ports": {
-          "bundles": 9112
+          "bundles": 9113
         },
         "ts": {
           "compiler": "tsc"
