@@ -1,7 +1,6 @@
 {
-  "scope": "beyond-js",
-  "name": "react-17-widgets",
-  "version": "0.0.2",
+  "name": "@beyond-js/react-17-widgets",
+  "version": "0.0.3",
   "license": "MIT",
   "description": "Create web projects as standalone microfrontends with beyondJS and React 17",
   "modules": {
