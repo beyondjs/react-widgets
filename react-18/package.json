@@ -1,6 +1,6 @@
 {
   "name": "@beyond-js/react-18-widgets",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Create web projects as standalone microfrontends with beyondJS and React 18",
   "license": "MIT",
   "modules": {

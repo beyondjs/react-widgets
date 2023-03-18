@@ -1,0 +1,6 @@
+{
+  "name": "hooks",
+  "platforms": "ssr",
+  "bundle": "ts",
+  "files": "*"
+}

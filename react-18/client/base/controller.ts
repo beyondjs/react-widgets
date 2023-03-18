@@ -9,12 +9,20 @@ abstract class ReactWidgetController extends WidgetClientController {
     #wrapper: Wrapper;
     #root: Root;
 
+    #mounted = false;
+    get mounted() {
+        return this.#mounted;
+    }
+
     // This property must be overwritten
     get Widget(): React.JSXElementConstructor<any> {
         return null;
     }
 
     mount(props?: Record<string, any>) {
+        if (this.#mounted) return;
+        this.#mounted = true;
+
         if (!this.Widget) {
             return {errors: [`Widget "${this.element}" does not export a Widget class`]};
         }
@@ -50,6 +58,9 @@ abstract class ReactWidgetController extends WidgetClientController {
     }
 
     unmount() {
+        if (!this.#mounted) return;
+
+        this.#mounted = false;
         this.#root.unmount();
     }
 
