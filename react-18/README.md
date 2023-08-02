@@ -8,6 +8,7 @@ React framework version 18 in BeyondJS projects in a simple and straightforward 
 
 -   Easy integration of React into BeyondJS projects
 -   Built on the extensible `@beyond-js/widgets` package
+-   Includes useful hooks like [useBinder](./react-18/client/hooks/readme/use-binder.md) and [useTexts](./react-18/client/hooks/readme/use-texts.md)
 
 ## Getting Started
 
@@ -17,7 +18,7 @@ React framework version 18 in BeyondJS projects in a simple and straightforward 
 npm install @beyond-js/react-18-widgets
 ```
 
-2. create your `tsx` files directly.
+2. Create your `tsx` files directly.
 
 ## Contributing
 
