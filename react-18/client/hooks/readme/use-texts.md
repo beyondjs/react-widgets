@@ -28,9 +28,10 @@ function useTexts(specifier: string, key?: string): [boolean, object]
 ### Example
 
 ```typescript
+import * as React from 'react';
 import {useTexts} from '@beyond-js/react-18-widgets/hooks';
 import { module } from 'beyond_context';
-import * as React from 'react';
+
 
 function MyComponent() {
     const [textsReady, texts] = useTexts(module.specifier);
