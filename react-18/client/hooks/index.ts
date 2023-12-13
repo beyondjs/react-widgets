@@ -12,13 +12,13 @@ import * as React from "react";
    const bindEvents : string[] = typeof events === 'string' ? [events] : events;
     React.useEffect(() => {
         objects.forEach(object => {
-            if(!object?.bind) return
-            bindEvents.forEach(event => object.bind(event, onBinder));
+            if(!object?.on) return
+            bindEvents.forEach(event => object.on(event, onBinder));
         });
        
         return () => objects.forEach(object => {
-            if(!object?.unbind) return
-            bindEvents.forEach(event => object.unbind(event, onBinder));
+            if(!object?.off) return
+            bindEvents.forEach(event => object.off(event, onBinder));
         });
     }, []);
 }
