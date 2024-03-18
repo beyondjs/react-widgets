@@ -1,6 +1,6 @@
 {
 	"name": "@beyond-js/react-18-widgets",
-	"version": "1.1.0",
+	"version": "1.0.3",
 	"description": "Create web projects as standalone microfrontends with beyondJS and React 18",
 	"license": "MIT",
 	"repository": "https://github.com/beyondjs/react-widgets",
@@ -44,7 +44,7 @@
 	"dependencies": {
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"@beyond-js/widgets": "~0.2.0",
+		"@beyond-js/widgets": "~0.2.",
 		"@beyond-js/kernel": "~0.1.9"
 	},
 	"devDependencies": {
