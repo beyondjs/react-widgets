@@ -1,5 +1,6 @@
+import type { PageURI } from '@beyond-js/widgets/routing';
 import { ReactWidgetController } from '@beyond-js/react-18-widgets/base';
-import { PageURI } from '@beyond-js/widgets/routing';
+import { manager } from '@beyond-js/widgets/routing';
 
 export /*bundle*/
 abstract class PageReactWidgetController extends ReactWidgetController {
@@ -13,7 +14,10 @@ abstract class PageReactWidgetController extends ReactWidgetController {
 	}
 
 	async initialise() {
-		this.#uri = new PageURI({ widget: <any>this.widget });
+		const { widget } = this;
+		const uri = manager.pages.obtain({ widget });
+		this.#uri = uri;
+
 		await super.initialise();
 	}
 }

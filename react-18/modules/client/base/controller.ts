@@ -1,8 +1,22 @@
+import type { BeyondWidget } from '@beyond-js/widgets/render';
+import type { IWidgetStore, WidgetAttributes } from '@beyond-js/widgets/controller';
 import * as React from 'react';
 import { createRoot, Root, hydrateRoot } from 'react-dom/client';
 import { WidgetClientController } from '@beyond-js/widgets/controller';
 import Widget from './widget';
 import { Wrapper } from './wrapper';
+import { PageURI } from '@beyond-js/widgets/routing';
+
+export /*bundle*/ interface IWidgetProps {
+	widget: BeyondWidget;
+	component: BeyondWidget;
+	attributes: WidgetAttributes;
+	store: IWidgetStore;
+}
+
+export /*bundle*/ interface IPageWidgetProps extends IWidgetProps {
+	uri: PageURI;
+}
 
 export /*bundle*/
 abstract class ReactWidgetController extends WidgetClientController {
