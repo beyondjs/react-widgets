@@ -1,6 +1,0 @@
-{
-  "name": "base",
-  "platforms": "ssr",
-  "bundle": "ts",
-  "files": "*"
-}

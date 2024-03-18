@@ -1,6 +1,0 @@
-{
-  "name": "page",
-  "platforms": "ssr",
-  "bundle": "ts",
-  "files": "*"
-}

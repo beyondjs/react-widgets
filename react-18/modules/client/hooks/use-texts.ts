@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CurrentTexts } from '@beyond-js/kernel/texts';
 
 export /*bundle*/
-function useTexts(specifier: string, key?: string): [boolean, Record<string, any>] {
+function useTexts(specifier: string, key?: string): [boolean, object] {
 	const [ready, setReady] = React.useState(false);
 	const [texts, setTexts] = React.useState({});
 
