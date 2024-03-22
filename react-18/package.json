@@ -10,16 +10,6 @@
 	"deployment": {
 		"distributions": [
 			{
-				"name": "npm",
-				"maps": "external",
-				"npm": {
-					"platforms": {
-						"web": "web",
-						"ssr": "ssr"
-					}
-				}
-			},
-			{
 				"name": "web",
 				"platform": "web",
 				"ports": {
@@ -44,7 +34,7 @@
 	"dependencies": {
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"@beyond-js/widgets": "~0.2.",
+		"@beyond-js/widgets": "~0.1.6",
 		"@beyond-js/kernel": "~0.1.9"
 	},
 	"devDependencies": {

@@ -10,16 +10,6 @@
 	"deployment": {
 		"distributions": [
 			{
-				"name": "npm",
-				"maps": "external",
-				"npm": {
-					"platforms": {
-						"web": "web",
-						"ssr": "ssr"
-					}
-				}
-			},
-			{
 				"name": "web",
 				"platform": "web",
 				"ports": {
