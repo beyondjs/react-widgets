@@ -1,5 +1,13 @@
 # @beyond-js/react-18-widgets
 
+### v1.1.3 --- pending
+
+### Fixed
+
+-   Resolved a race condition issue by deferring the component unmount operation using `setTimeout`. This change ensures
+    that the unmount process occurs after the current React render cycle has completed, addressing warnings related to
+    synchronous unmount attempts during rendering.
+
 ## v1.1.2 - 2024/4/10
 
 ### Fixes
