@@ -78,7 +78,7 @@ abstract class ReactWidgetController extends WidgetClientController {
 		if (!this.#mounted) return;
 
 		this.#mounted = false;
-		this.#root.unmount();
+		globalThis.setTimeout(() => this.#root.unmount(), 0);
 	}
 
 	refresh() {
