@@ -14,7 +14,9 @@ function useBinder(objects: ReactiveModel[], onBinder: CallbackFunction, events:
 	React.useEffect(() => {
 		const callback = (object: ReactiveModel, method: 'on' | 'off') => {
 			if (!object[method]) return;
-			bindEvents.forEach(event => object.on(event, onBinder));
+			bindEvents.forEach(event => {
+				object[method](event, onBinder)
+			});
 		};
 		objects.forEach(object => callback(object, 'on'));
 		return () => objects.forEach(object => callback(object, 'off'));
