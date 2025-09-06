@@ -1,7 +1,7 @@
 {
-	"name": "@beyond-js/react-17-widgets",
-	"version": "1.1.1",
-	"description": "Create web projects as standalone microfrontends with beyondJS and React 17",
+	"name": "@beyond-js/react-19-widgets",
+	"version": "1.0.0",
+	"description": "Create web projects as standalone microfrontends with beyondJS and React 19",
 	"license": "MIT",
 	"repository": "https://github.com/beyondjs/react-widgets",
 	"modules": {
@@ -13,7 +13,7 @@
 				"name": "web",
 				"platform": "web",
 				"ports": {
-					"bundles": 9110
+					"bundles": 9212
 				},
 				"ts": {
 					"compiler": "tsc"
@@ -23,7 +23,7 @@
 				"name": "ssr",
 				"platform": "ssr",
 				"ports": {
-					"bundles": 9111
+					"bundles": 9213
 				},
 				"ts": {
 					"compiler": "tsc"
@@ -32,13 +32,13 @@
 		]
 	},
 	"dependencies": {
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"@beyond-js/widgets": "~1.1.0",
-		"@beyond-js/kernel": "~0.1.11"
+		"@beyond-js/kernel": "~0.1.13",
+		"@beyond-js/widgets": "~1.1.1",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1"
 	},
 	"devDependencies": {
-		"@types/react": "^17.0.52",
-		"@types/react-dom": "^17.0.18"
+		"@types/react": "^18.0.26",
+		"@types/react-dom": "^18.0.9"
 	}
 }

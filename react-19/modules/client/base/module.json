@@ -1,0 +1,6 @@
+{
+	"name": "base",
+	"platforms": ["web", "android", "ios"],
+	"bundle": "ts",
+	"files": "*"
+}

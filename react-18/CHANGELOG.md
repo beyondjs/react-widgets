@@ -1,6 +1,18 @@
 # @beyond-js/react-18-widgets
 
-### v1.1.3 --- pending
+### v1.1.6
+
+### Features
+
+-   **useStore Hook (feat)**: Added a new `useStore` hook that provides a generic React hook for subscribing to reactive
+    stores. The hook supports subscribing to multiple events and automatically handles cleanup when the component
+    unmounts.
+
+### Updates
+
+-   **Dependencies Updated**: Updated package dependencies to ensure compatibility and security improvements.
+
+### v1.1.5
 
 ### Fixed
 
