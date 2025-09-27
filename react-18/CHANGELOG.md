@@ -1,5 +1,27 @@
 # @beyond-js/react-18-widgets
 
+### v1.1.7
+
+### Features
+
+-   **useScreen Hook (feat)**: Added a new `useScreen` hook that provides responsive screen size information with
+    configurable breakpoints. The hook returns current dimensions, breakpoint key, boolean flags for each breakpoint,
+    and semantic device type flags (isMobile, isTablet, isDesktop).
+
+### Updates
+
+-   **Type System Enhancement (update)**: Centralized all types and interfaces in a dedicated `types.ts` file with
+    consistent "I" prefix naming convention for better type organization and maintainability.
+-   **Documentation Improvements (update)**: Added comprehensive README files for all custom hooks including `useScreen`
+    and `useStore` with detailed usage examples, TypeScript support, and integration guides.
+-   **Main README Enhancement (update)**: Completely restructured the main README.md with better organization, hook
+    categories, quick examples, and comprehensive documentation links.
+
+### Fixed
+
+-   **useBinder Type Fixes (fix)**: Fixed missing type definitions for `useBinder` hook by adding proper TypeScript
+    interfaces (`IBinderEvents`, `ICallbackFunction`, `IReactiveModel`) to the centralized types file.
+
 ### v1.1.6
 
 ### Features

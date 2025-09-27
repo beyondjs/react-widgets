@@ -12,7 +12,11 @@ export interface IReactiveStore {
  * @param store The reactive store to subscribe to
  * @param events Array of event names to subscribe to. Defaults to ['change']
  */
-export /*bundle*/ function useStore<T extends IReactiveStore>(store: T, events: string[] = ['change']): T {
+export /*bundle*/ function useStore<T extends IReactiveStore>(
+	store: T,
+	events: string[] = ['change'],
+	onListen?: () => void
+): T {
 	if (!Array.isArray(events)) {
 		throw new Error('The events parameter must be an array of strings');
 	}
@@ -20,7 +24,10 @@ export /*bundle*/ function useStore<T extends IReactiveStore>(store: T, events: 
 	const [, setVersion] = useState(0);
 
 	useEffect(() => {
-		const handler = () => setVersion(v => v + 1);
+		const handler = () => {
+			setVersion(v => v + 1);
+			onListen?.();
+		};
 		// Subscribe to all specified events
 		events.forEach(event => store.on(event, handler));
 		// Cleanup: unsubscribe from all events

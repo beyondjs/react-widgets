@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BinderEvents, CallbackFunction, ReactiveModel } from './types';
+import { IBinderEvents, ICallbackFunction, IReactiveModel } from './types';
 /***
  * Executes a useEffect hook binging the event defined in all
  * objects passed
@@ -8,11 +8,11 @@ import { BinderEvents, CallbackFunction, ReactiveModel } from './types';
  * @param {string} events the event to be listened, by default is event change
  */
 export /*bundle*/
-function useBinder(objects: ReactiveModel[], onBinder: CallbackFunction, events: BinderEvents = 'change'): void {
+function useBinder(objects: IReactiveModel[], onBinder: ICallbackFunction, events: IBinderEvents = 'change'): void {
 	const bindEvents: string[] = typeof events === 'string' ? [events] : events;
 
 	React.useEffect(() => {
-		const callback = (object: ReactiveModel, method: 'on' | 'off') => {
+		const callback = (object: IReactiveModel, method: 'on' | 'off') => {
 			if (!object[method]) return;
 			bindEvents.forEach(event => {
 				object[method](event, onBinder);

@@ -32,7 +32,7 @@
 		]
 	},
 	"dependencies": {
-		"@beyond-js/kernel": "~0.1.13",
+		"@beyond-js/kernel": "~0.1.14",
 		"@beyond-js/widgets": "~1.1.1",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1"
