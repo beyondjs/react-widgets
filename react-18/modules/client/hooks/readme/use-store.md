@@ -19,7 +19,11 @@ re-render whenever the store emits any of the subscribed events.
 Here is the function signature:
 
 ```typescript
-function useStore<T extends IReactiveStore>(store: T, events: string[] = ['change'], onListen?: () => void): T;
+function useStore<T extends IReactiveStore>(
+	store: T,
+	events: string[] = ['change'],
+	onListen?: (...args: any[]) => void
+): T;
 ```
 
 ### Parameters
@@ -28,6 +32,7 @@ function useStore<T extends IReactiveStore>(store: T, events: string[] = ['chang
     `.off(event, handler)` methods.
 -   `events` (string[], optional): Array of event names to subscribe to. Defaults to `['change']`.
 -   `onListen` (Function, optional): Callback function that will be executed when any subscribed event is fired.
+    Receives any parameters passed by the store events.
 
 ### Return Value
 
@@ -39,8 +44,8 @@ The store must implement the `IReactiveStore` interface:
 
 ```typescript
 interface IReactiveStore {
-	on(event: string, handler: () => void): void;
-	off(event: string, handler: () => void): void;
+	on(event: string, handler: (...args: any[]) => void): void;
+	off(event: string, handler: (...args: any[]) => void): void;
 }
 ```
 
@@ -93,9 +98,9 @@ import { useStore } from '@beyond-js/react-18-widgets/hooks';
 function MyComponent({ store }) {
 	const [updateCount, setUpdateCount] = React.useState(0);
 
-	const reactiveStore = useStore(store, ['change'], () => {
+	const reactiveStore = useStore(store, ['change'], (...args) => {
 		setUpdateCount(prev => prev + 1);
-		console.log('Store updated!');
+		console.log('Store updated!', args);
 	});
 
 	return (
@@ -122,6 +127,26 @@ function MyComponent({ userStore, settingsStore }) {
 			<h2>Welcome, {user.name}!</h2>
 			<p>Theme: {settings.theme}</p>
 			<p>Language: {settings.language}</p>
+		</div>
+	);
+}
+```
+
+#### With Event Parameters
+
+```typescript
+import * as React from 'react';
+import { useStore } from '@beyond-js/react-18-widgets/hooks';
+
+function MyComponent({ store }) {
+	const reactiveStore = useStore(store, ['change', 'update'], (eventType, data) => {
+		console.log(`Event: ${eventType}`, data);
+		// Handle different event types and their data
+	});
+
+	return (
+		<div>
+			<p>Store value: {reactiveStore.value}</p>
 		</div>
 	);
 }
@@ -163,7 +188,7 @@ class MyStore extends ReactiveModel {
 
 	updateValue(newValue: string) {
 		this.value = newValue;
-		this.trigger('change');
+		this.trigger('change', newValue);
 	}
 }
 

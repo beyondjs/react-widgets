@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
-
-export interface IReactiveStore {
-	on(event: string, handler: () => void): void;
-	off(event: string, handler: () => void): void;
-}
+import { IReactiveStore } from './types';
 
 /**
  * A generic React hook that subscribes to a reactive store.
@@ -11,11 +7,12 @@ export interface IReactiveStore {
  * to manage subscriptions, and emit events to trigger re-renders.
  * @param store The reactive store to subscribe to
  * @param events Array of event names to subscribe to. Defaults to ['change']
+ * @param onListen Optional callback function that receives any parameters passed by the store events
  */
 export /*bundle*/ function useStore<T extends IReactiveStore>(
 	store: T,
 	events: string[] = ['change'],
-	onListen?: () => void
+	onListen?: (...args: any[]) => void
 ): T {
 	if (!Array.isArray(events)) {
 		throw new Error('The events parameter must be an array of strings');
@@ -24,9 +21,9 @@ export /*bundle*/ function useStore<T extends IReactiveStore>(
 	const [, setVersion] = useState(0);
 
 	useEffect(() => {
-		const handler = () => {
+		const handler = (...args: any[]) => {
 			setVersion(v => v + 1);
-			onListen?.();
+			onListen?.(...args);
 		};
 		// Subscribe to all specified events
 		events.forEach(event => store.on(event, handler));
