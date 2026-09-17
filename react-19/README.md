@@ -1,30 +1,9 @@
-# Welcome to `@beyond-js/react-18-widgets` package
+# @beyond-js/react-19-widgets
 
-`@beyond-js/react-18-widgets` is a package for [BeyondJS](https://beyondjs.com), which is a platform for creating web
-projects as independent microfrontends. This package is built on `@beyond-js/widgets`, and allows developers to use the
-React framework version 18 in BeyondJS projects in a simple and straightforward way.
+React 19 controllers for Beyond Widgets. The [package manifest](package.json) defines dependencies and web/ssr distributions; [beyond.json](beyond.json) selects this package. These declarations do not establish npm availability or runtime compatibility.
 
-## Features
+Read the repository-local [architecture](../docs/architecture.md) and [hooks reference](../docs/hooks.md). Import ReactWidgetController from `@beyond-js/react-19-widgets/base`, PageReactWidgetController from `/page`, and the documented hooks from `/hooks`. Platform selection chooses the client or server implementation of base/page; internal source filenames are not additional public modules.
 
--   Easy integration of React into BeyondJS projects
--   Built on the extensible `@beyond-js/widgets` package
--   Includes useful hooks like [useBinder](./react-18/client/hooks/readme/use-binder.md) and [useTexts](./react-18/client/hooks/readme/use-texts.md)
+Supply a Widget component getter in the controller. The consuming app must provide registration metadata, matching React/react-dom versions, core Widgets/Kernel contracts and a compiler/loader that resolves these Beyond modules. There is no npm build/test script or standalone app in this directory.
 
-## Getting Started
-
-1. Install the `@beyond-js/react-18-widgets` package in your BeyondJS project:
-
-```
-npm install @beyond-js/react-18-widgets
-```
-
-2. Create your `tsx` files directly.
-
-## Contributing
-
-We welcome contributions to `@beyond-js/react-18-widgets`. If you'd like to contribute, please read
-the [Contribution Guidelines](https://beyondjs.com/docs/contributing).
-
-## License
-
-`@beyond-js/react-18-widgets` is [MIT licensed](LICENSE).
+React 19 page implementations currently import React 18 base and retain React 18 type dependencies; resolve these gaps before claiming an independent React 19 path.

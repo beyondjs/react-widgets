@@ -1,6 +1,6 @@
 # widgets/react-widgets agent instructions
 
-Canonical instructions for this repository and its descendants. Tool-specific files must only reference AGENTS.md. This is an independent Git repository; the current coordinated branch is `feature/next`.
+Canonical instructions for this repository and its descendants. Tool-specific files must only reference AGENTS.md. This is an independent Git repository.
 
 React-specific Widgets adapters. Keep version-specific behavior separate; a pass for one adapter is not proof for another.
 
@@ -10,4 +10,7 @@ React-specific Widgets adapters. Keep version-specific behavior separate; a pass
 - Read the relevant maintained references before architectural changes; label source findings, runtime evidence and proposals accurately. Use targeted validation for behavior changes; documentation/comment edits do not require unrelated builds or services.
 - Keep instructions concise here and link maintained documentation. Before editing nested areas, read any applicable nested AGENTS.md. Do not apply sibling repository instructions globally.
 
-Suite references: [widgets.md](../../docs/widgets.md), [styles.md](../../docs/styles.md). Read [README.md](README.md) when present. These links use the beyond-suite checkout layout; if opened independently, inspect local source and do not invent missing suite documentation.
+
+Read the local [README](README.md) for purpose and component contracts. Maintain self-contained documentation: relative Markdown links must stay inside this Git root, external repositories are optional named references, and supported execution examples use explicitly configured paths. Keep lasting architecture and API explanations separate from historical review/session records.
+
+Documentation follows [the local documentation standards](docs/AGENTS.md).

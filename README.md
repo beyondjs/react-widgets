@@ -1,38 +1,7 @@
-# Welcome to `@beyond-js/react-widgets` package
+# React Widgets
 
-`@beyond-js/react-widgets` is a package for [BeyondJS](https://beyondjs.com), a platform for creating web projects as independent microfrontends. This package provides a way to integrate the React framework into BeyondJS projects, with support for multiple versions of React.
+Framework controllers connecting React to Beyond Widgets, with separate packages for React 17, 18 and 19.
 
-## Features
+Read [architecture and lifecycle](docs/architecture.md) and [hooks](docs/hooks.md). Choose [React 17](react-17/README.md), [React 18](react-18/README.md) or [React 19](react-19/README.md) for package-specific entry points. Public modules are `/base`, `/page` and `/hooks` under the chosen version-specific package name; this repository has no umbrella root package manifest.
 
--   Easy integration of React into BeyondJS projects
--   Support for multiple versions of React
--   Built on the extensible `@beyond-js/widgets` package
-
-## Version Specific Packages
-
-We have created version-specific packages to cater to the needs of projects using different versions of React. These packages provide hooks and utilities tailored to the specific version of React they support. 
-
-Here are the links to the readme files for the version-specific packages:
-
--   [React 17 Widgets](./react-17/readme.md)
--   [React 18 Widgets](./react-18/readme.md)
-
-Please follow the links to learn more about the hooks and utilities provided in each package.
-
-## Getting Started
-
-1. Install the `@beyond-js/react-widgets` package in your BeyondJS project:
-
-```
-npm install @beyond-js/react-widgets
-```
-
-2. Choose the version-specific package that matches the React version used in your project.
-
-## Contributing
-
-We welcome contributions to `@beyond-js/react-widgets`. If you'd like to contribute, please read the [Contribution Guidelines](https://beyondjs.com/docs/contributing).
-
-## License
-
-`@beyond-js/react-widgets` is [MIT licensed](LICENSE).
+The adapters implement per-widget rendering, styles and refresh hooks. They depend on Beyond compilation and the core Widgets/runtime contracts. They do not themselves provide a development server or full-document SSR. Known teardown, subscription and React 19 cross-version dependency gaps are documented in the architecture guide.
