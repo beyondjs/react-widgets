@@ -1,0 +1,7 @@
+{
+	"platforms": [
+		"web",
+		"node"
+	],
+	"entry": "index.ts"
+}

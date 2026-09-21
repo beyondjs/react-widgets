@@ -8,13 +8,13 @@ React Widgets supplies framework controllers for Beyond custom-element widgets. 
 | --- | --- | --- |
 | react-17 / @beyond-js/react-17-widgets 1.1.1 | React/react-dom ^17.0.2; Widgets ~1.1.0; Kernel ~0.1.11 | 9110 / 9111 |
 | react-18 / @beyond-js/react-18-widgets 1.1.7 | React/react-dom ^18.2.0; Widgets ~1.1.1; Kernel ~0.1.14 | 9112 / 9113 |
-| react-19 / @beyond-js/react-19-widgets 1.0.0 | React/react-dom ^19.1.1; Widgets ~1.1.1; Kernel ~0.1.14 | 9212 / 9213 |
+| react-19 / @beyond-js/react-19-widgets 1.0.0 | React/react-dom ^19.1.1 with @types/react and @types/react-dom ^19.1.0; Widgets ~1.1.1; Kernel ~0.1.14 | none: authored for Packages |
 
 These are checkout declarations, not npm publication or compatibility guarantees. There is no root umbrella package.json: select a version directory and its beyond.json/package.json. Do not install a guessed umbrella package to select the adapter.
 
-Each package exposes `/base` (ReactWidgetController), `/page` (PageReactWidgetController), and `/hooks`. Client base/page target web/android/ios; server base/page target ssr using the same public import. Hooks target all four platforms. Internal wrapper, widget and styles files are not separate public Beyond modules. React 18/19 client base also marks IWidgetProps and IPageWidgetProps as bundle exports.
+Each package exposes `/base` (ReactWidgetController), `/page` (PageReactWidgetController), and `/hooks`. React 17 and 18 keep the Engine layout: client base/page target web/android/ios and server base/page target ssr through the same public import, and hooks target all four platforms. Since 2026-09-21 React 19 is authored for Packages: `beyond.modules` names `modules`, the `ts` bundler runs on the development runtime, and each public module is one directory with one manifest — `base` and `page` hold `client/` and `server/` with one entry per platform under `conditionals` (`web` and `node`, each excluding the other side), and `hooks` names its entry. Internal wrapper, widget and styles files are not separate public Beyond modules. React 18/19 client base also marks IWidgetProps and IPageWidgetProps as bundle exports.
 
-React 19 client and server page files import **react-18-widgets/base**, absent from its dependency declarations. React 19 still declares React 18 type packages. Its page inheritance is therefore not isolated to its own base; repair and verify this before claiming React 19 integration.
+React 19 page files import `@beyond-js/react-19-widgets/base` and the package declares the React 19 type packages; the earlier dependency on the React 18 base is repaired. The Packages development service supplies the package to every workspace from the Beyond toolchain, with React resolved once from the installation so that a widget and the adapter share one copy.
 
 ## Authoring and inherited contract
 
@@ -45,11 +45,11 @@ The two base implementations follow the same flow:
 2. Existing element children in the holder select `hydrateRoot`; an empty holder selects `createRoot` and `root.render`. This is a DOM heuristic, not proof of matching server output.
 3. An internal Wrapper reads the controller's current Widget getter. The React wrapper renders stylesheet links first and waits for `styles.ready` before including the component on a fresh mount. Hydration includes the component immediately.
 4. `refresh()` calls Wrapper.changed, which the rendered wrapper replaces with a React state update. It rereads Widget. Component identity and React reconciliation determine state survival; this is not a complete React Fast Refresh implementation or a universal state-preservation guarantee.
-5. `unmount()` clears mounted and schedules root.unmount with a zero-delay timer.
+5. `unmount()` clears mounted. React 18 schedules root.unmount with a zero-delay timer; React 19 unmounts the root synchronously, so an element that is removed and inserted mounts a new root in an empty holder.
 
 The style component subscribes to StylesManager change in an effect and unregisters on cleanup. Link load **and error** both call `styles.onloaded(url)`, allowing readiness after a failed stylesheet request; readiness does not prove styles loaded successfully. The wrapper clears holder display during rendering even while component insertion waits for styles.
 
-Mount catches/logs synchronous rendering exceptions without returning structured errors. Asynchronous React errors are outside that catch. Refresh before wrapper creation can throw. Missing/failed root creation leaves delayed unmount unsafe; a rapid remount before the timer runs can cause the timer to access the newly assigned root. These lifecycle limitations require explicit verification before promising reconnect/dispose safety.
+Mount catches/logs synchronous rendering exceptions without returning structured errors. Asynchronous React errors are outside that catch. In React 18, refresh before wrapper creation can throw, and a rapid remount before the unmount timer runs can make the timer access the newly assigned root. In React 19, refresh without a wrapper renders, a failed mount clears the mounted flag, and the command line's web acceptance moves a widget between two roots, updates an imported module while it is mounted and hydrates server output: the element, the controller and the holder are kept, the store survives, and a `useState` value is created again with the view.
 
 ### React hooks
 
@@ -72,15 +72,15 @@ This is per-widget rendering, not a server, streaming renderer, request-scoped l
 
 ## Build and verification
 
-Each version's beyond.json selects its package.json, which defines web and ssr distributions. Modules are TS bundles with ES2017 target, ES2020 modules, react-jsx, Node module resolution and noImplicitAny. A Beyond compiler resolves public module composition and platform variants; running Node directly against these TypeScript directories is not the package loading contract. There are no package npm scripts, dedicated executable test suite or checked-in publishing workflow. Hook examples are documentation, not executed integration evidence.
+Each version's beyond.json selects its package.json. React 17 and 18 define Engine web and ssr distributions with TS bundles; React 19 is compiled by Packages from its manifests, and its sources keep the ES2017 target, ES2020 modules, react-jsx and noImplicitAny of their tsconfig files. A Beyond compiler resolves public module composition and platform variants; running Node directly against these TypeScript directories is not the package loading contract. There are no package npm scripts or checked-in publishing workflow. React 19 is exercised by the command line's web acceptance in a real browser (a widget with Tailwind and a transitive stylesheet, updates, boundaries and SSR hydration); hook examples remain documentation, not executed integration evidence.
 
 The repository devcontainer uses Node 18 and Beyond 1.2.0. Per-version containers use Ubuntu focal/Node 18 installation instructions and postCreate npm install. These legacy configurations do not establish compatibility with a newer compiler/runtime. Select the version directory, resolve its declared dependencies and configure a consuming Beyond application/compiler explicitly; no universal dev-server command is supplied here.
 
-Verification needs separate cases for each version: mount, error and CSS failure, routing, script/style refresh, state survival, holder hydration, detach/remount, subscriber disposal, React 17 retargeting and React 18/19 delayed unmount. React 19 must also resolve its erroneous cross-version page dependency and type alignment. Preserve the familiar Controller → Wrapper → Widget/Styles structure while repairing those boundaries.
+Verification needs separate cases for each version: mount, error and CSS failure, routing, script/style refresh, state survival, holder hydration, detach/remount, subscriber disposal, React 17 retargeting and React 18 delayed unmount. The React 19 cases for mount, stylesheet adoption and replacement, script refresh through an original import, detach/remount, a late import and SSR hydration are executed by the web acceptance; routing, error and CSS failure remain to be written. Preserve the familiar Controller → Wrapper → Widget/Styles structure while repairing those boundaries.
 
 ## Source references
 
 - [React 17 client controller](../react-17/modules/client/base/controller.ts), [event retargeting](../react-17/modules/client/base/retarget-events.ts), [server controller](../react-17/modules/ssr/base/controller.ts).
 - [React 18 client controller](../react-18/modules/client/base/controller.ts), [widget wrapper](../react-18/modules/client/base/widget.tsx), [styles](../react-18/modules/client/base/styles.tsx), [page](../react-18/modules/client/page/page.ts), [server controller](../react-18/modules/ssr/base/controller.ts).
-- [React 19 page](../react-19/modules/client/page/page.ts), [server page](../react-19/modules/ssr/page/page.ts), [manifest](../react-19/package.json).
+- [React 19 page](../react-19/modules/page/client/page.ts), [server page](../react-19/modules/page/server/page.ts), [base manifest](../react-19/modules/base/module.json), [page manifest](../react-19/modules/page/module.json), [manifest](../react-19/package.json).
 - [Hooks reference](hooks.md) covers supported exports, arguments, subscription lifetime and source links.

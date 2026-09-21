@@ -4,41 +4,22 @@
 	"description": "Create web projects as standalone microfrontends with beyondJS and React 19",
 	"license": "MIT",
 	"repository": "https://github.com/beyondjs/react-widgets",
-	"modules": {
-		"path": "./modules"
-	},
-	"deployment": {
-		"distributions": [
-			{
-				"name": "web",
-				"platform": "web",
-				"ports": {
-					"bundles": 9212
-				},
-				"ts": {
-					"compiler": "tsc"
-				}
-			},
-			{
-				"name": "ssr",
-				"platform": "ssr",
-				"ports": {
-					"bundles": 9213
-				},
-				"ts": {
-					"compiler": "tsc"
-				}
-			}
-		]
-	},
 	"dependencies": {
 		"@beyond-js/kernel": "~0.1.14",
 		"@beyond-js/widgets": "~1.1.1",
 		"react": "^19.1.1",
-		"react-dom": "^19.1.1"
+		"react-dom": "^19.1.1",
+		"@types/react": "^19.1.0",
+		"@types/react-dom": "^19.1.0"
 	},
-	"devDependencies": {
-		"@types/react": "^18.0.26",
-		"@types/react-dom": "^18.0.9"
+	"beyond": {
+		"modules": "./modules",
+		"bundler": "ts"
+	},
+	"bundlers": {
+		"ts": {
+			"specifier": "@beyond-js/packages/bundlers/ts",
+			"runtime": "@beyond-js/local-2026/bundle"
+		}
 	}
 }

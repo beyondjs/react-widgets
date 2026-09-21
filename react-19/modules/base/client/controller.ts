@@ -5,7 +5,6 @@ import { createRoot, Root, hydrateRoot } from 'react-dom/client';
 import { WidgetClientController } from '@beyond-js/widgets/controller';
 import Widget from './widget';
 import { Wrapper } from './wrapper';
-import { PageURI } from '@beyond-js/widgets/routing';
 
 export /*bundle*/ interface IWidgetProps {
 	widget: BeyondWidget;
@@ -15,9 +14,18 @@ export /*bundle*/ interface IWidgetProps {
 }
 
 export /*bundle*/ interface IPageWidgetProps extends IWidgetProps {
-	uri: PageURI;
+	uri: unknown;
 }
 
+/**
+ * The client controller of a widget whose view is a React 19 component.
+ *
+ * The component receives the widget, its attributes and its store as props. It is rendered with a root
+ * of its own in the holder of the element, or hydrated into the markup a server render left there. An
+ * update of the module refreshes the mounted view through the wrapper, which re-renders with the current
+ * component; unmounting releases the root synchronously, so an element that is removed and inserted mounts
+ * a new root in a holder that is empty.
+ */
 export /*bundle*/
 abstract class ReactWidgetController extends WidgetClientController {
 	#wrapper: Wrapper;
@@ -35,11 +43,12 @@ abstract class ReactWidgetController extends WidgetClientController {
 
 	mount(props?: Record<string, any>) {
 		if (this.#mounted) return;
-		this.#mounted = true;
 
 		if (!this.Widget) {
-			return { errors: [`Widget "${this.element}" does not export a Widget class`] };
+			console.error(`Widget "${this.element}" does not export a Widget class`);
+			return;
 		}
+		this.#mounted = true;
 
 		props = Object.assign(
 			{
@@ -51,14 +60,12 @@ abstract class ReactWidgetController extends WidgetClientController {
 			props ? props : {}
 		);
 
-		const holder: HTMLSpanElement = (<any>this.widget).holder;
-		const hydrate = !!holder.children.length;
-
 		// Render the widget
 		try {
 			const wrapper = (this.#wrapper = new Wrapper(this));
 			const { styles, widget } = this;
 			const { holder } = <any>widget;
+			const hydrate = !!holder.children.length;
 			const p = { wrapper, props, styles, holder, hydrate };
 			const element = React.createElement(Widget, p);
 
@@ -69,6 +76,7 @@ abstract class ReactWidgetController extends WidgetClientController {
 				root.render(element);
 			}
 		} catch (exc) {
+			this.#mounted = false;
 			console.log(`Error rendering widget "${this.widget.localName}":`);
 			console.log(exc.stack);
 		}
@@ -76,12 +84,15 @@ abstract class ReactWidgetController extends WidgetClientController {
 
 	unmount() {
 		if (!this.#mounted) return;
-
 		this.#mounted = false;
-		globalThis.setTimeout(() => this.#root.unmount(), 0);
+
+		const root = this.#root;
+		this.#root = void 0;
+		this.#wrapper = void 0;
+		root?.unmount();
 	}
 
 	refresh() {
-		this.#wrapper.changed();
+		this.#wrapper ? this.#wrapper.changed() : this.render();
 	}
 }

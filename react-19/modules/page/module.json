@@ -1,0 +1,20 @@
+{
+	"platforms": [
+		"web",
+		"node"
+	],
+	"conditionals": {
+		"web": {
+			"entry": "client/index.ts",
+			"excludes": [
+				"server"
+			]
+		},
+		"node": {
+			"entry": "server/index.ts",
+			"excludes": [
+				"client"
+			]
+		}
+	}
+}

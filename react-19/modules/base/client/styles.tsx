@@ -6,6 +6,10 @@ interface Props {
 	widget: HTMLElement;
 }
 
+/**
+ * The stylesheet links of a widget, rendered beside its view inside its root. A sheet that loads is
+ * reported as loaded; a sheet that fails is reported as failed, so the previous version stays adopted.
+ */
 export default function ({ styles }: Props) {
 	const rs = React.useState(0);
 
@@ -18,7 +22,8 @@ export default function ({ styles }: Props) {
 
 	const head: React.ReactElement[] = [...styles.resources].map(url => {
 		const loaded = () => styles.onloaded(url);
-		return <link key={url} href={url} rel="stylesheet" onLoad={loaded} onError={loaded} />;
+		const failed = () => (styles.onerror ? styles.onerror(url) : styles.onloaded(url));
+		return <link key={url} href={url} rel="stylesheet" onLoad={loaded} onError={failed} />;
 	});
 	return <>{head}</>;
 }

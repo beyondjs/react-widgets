@@ -2,7 +2,7 @@ import type { URI } from '@beyond-js/kernel/routing';
 import type { PageURI } from '@beyond-js/widgets/routing';
 import type { BeyondWidget } from '@beyond-js/widgets/render';
 import type { IPageWidgetController } from '@beyond-js/widgets/controller';
-import { ReactWidgetController } from '@beyond-js/react-18-widgets/base';
+import { ReactWidgetController } from '@beyond-js/react-19-widgets/base';
 import { manager } from '@beyond-js/widgets/routing';
 
 export /*bundle*/
