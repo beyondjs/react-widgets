@@ -13,6 +13,10 @@
 		"@types/react-dom": "^19.1.0"
 	},
 	"beyond": {
+		"publication": {
+			"protocol": "beyond-publication/1",
+			"form": "source"
+		},
 		"modules": "./modules",
 		"bundler": "ts"
 	},
